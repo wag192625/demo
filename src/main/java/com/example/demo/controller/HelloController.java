@@ -18,7 +18,7 @@ public class HelloController {
     //일반통행 구조(페이지 전환(변경))
     @GetMapping("hello")
     public String hello(Model model) {
-//        Slime slime = new Slime();
+//        Slime slime = new Slime();1
 //        int hpData = Slime.GetHp();
 //        model.addAttribute("data", hpData);
         model.addAttribute("data", "hello!!!");
