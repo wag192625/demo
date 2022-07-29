@@ -22,12 +22,12 @@ public class HelloController {
 //        int hpData = Slime.GetHp();
 //        model.addAttribute("data", hpData);
         model.addAttribute("data", "hello!!!");
-        //아래 returm hello는 뎀플릿에 hello.html로 이동
+        //아래 returm hello는 템플릿에 hello.html로 이동
         //Controller는 return을 통해 '알아서' hello라는 이름의 html파일을 찾는다.
         return "hello";
     }
 
-    //호출하는 클라이언ㅌ의 정보를 가져다가 서버(Controller)에 전달해주는 매핑
+    //호출하는 클라이언트의 정보를 가져다가 서버(Controller)에 전달해주는 매핑
     //클라이언트가 요청한 정보를 가져오는 어노테이션
 //    @RequestMapping
 
@@ -45,12 +45,14 @@ public class HelloController {
         //클라이언트에서 받아온 id1변수이름의 데이터를
         //RwquesrParam의 데이터로 연산작업
         String abc = id + "안녕하세요.";
+        String abc3 = id + "안녕하지 않으세요.";
         //작업한 데이터를 model에 넣어서 클라이언트에 전송
         //model.addAttribute(Key, val) // value에는 배열, 객체도 아무거나 넣을 수 있음
         model.addAttribute("msg", "H1" + id + "!!");
         model.addAttribute("msg", abc);
+        model.addAttribute("msg", abc3);
         model.addAttribute("id2", id);
-        
+
         //static으로 선언한 문자열 변수를 return하여 String 메모리 절약
         return account;
         //viewResolver를 통해 html 확장자를 가진 제목의 문서를 비교해서 찾아감

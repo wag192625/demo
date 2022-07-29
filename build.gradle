@@ -5,6 +5,7 @@ plugins {
 }
 
 group = 'com.example'
+//첫번째 자리 : 메이저 업데이트, 두번째 자리 : 마이너업데이트, 세번째 자리 : fix버전(오탈자, 이미지 변경)
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -13,11 +14,18 @@ repositories {
 }
 
 dependencies {
+    //롬북 추가
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    //타임리프 : springboot(백엔드)와 html을 '유연하게' 연결해주는 템플릿
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //starter web에 tomcat이 포함되어 있음
+    //tomcat : spring 프로젝트를 웹하고 연결해주는 도구
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+//테스트 모듈에 관한 정보
 tasks.named('test') {
     useJUnitPlatform()
 }
