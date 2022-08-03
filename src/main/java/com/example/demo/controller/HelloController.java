@@ -43,7 +43,7 @@ public class HelloController {
     @RequestMapping(value = "account", method = RequestMethod.POST)
     public String account(@RequestParam("id1")String id, Model model) {
         //클라이언트에서 받아온 id1변수이름의 데이터를
-        //RwquesrParam의 데이터로 연산작업
+        //RequesrParam의 데이터로 연산작업
         String abc = id + "안녕하세요.";
         String abc3 = id + "안녕하지 않으세요.";
         //작업한 데이터를 model에 넣어서 클라이언트에 전송
@@ -58,5 +58,4 @@ public class HelloController {
         //viewResolver를 통해 html 확장자를 가진 제목의 문서를 비교해서 찾아감
         //return 문자열과 Model 데이터를 viewResolver에 전달
     }
-
 }
