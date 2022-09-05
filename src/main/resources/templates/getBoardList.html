@@ -5,22 +5,59 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/default.css">
     <title>Title</title>
+    <style>
+        .show {
+            position: relative;
+        }   /*  */
+        .show_hover_show {
+            display: none;
+        }
+        .show:hover .show_hover_show {
+            position: absolute;
+            display: block;
+            width: 200px;
+            background-color: white;
+            border: 2px solid black;
+            font-size: 12px;
+            top: 45px;
+            left: 0px;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body th:align="center">
     <h1>게시글 목록</h1>
     <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
         <tr>
+<!--            <select th:field="*{board.category}">-->
+<!--                <option value="">선택</option>-->
+<!--                <option th:each="category : ${board.category}"  th:value="${board.category}" th:text="${board.category}" >전체글</option>-->
+<!--                <option th:each="category : ${board.category}"  th:value="${board.category}" th:text="${board.category}" >인기글</option>-->
+<!--            </select>-->
+            <select name="category">
+                <option value="">선택</option>-->
+                <option value="전체글">전체글</option>-->
+                <option value=인기글"">인기글</option>-->
+            </select>
+        </tr>
+        <tr>
             <th bgcolor="orange" width="100">번호</th>
+            <th bgcolor="orange" width="100">카테고리</th>
             <th bgcolor="orange" width="200">제목</th>
-            <th bgcolor="orange" width="150">작성자</th>
+<!--            <th class="show" bgcolor="orange" width="200">제목-->
+<!--                <span class="show_hover_show"></span></th>-->
+            <th bgcolor="orange" width="100">내용</th>
+            <th bgcolor="orange" width="100">작성자</th>
             <th bgcolor="orange" width="150">등록일</th>
             <th bgcolor="orange" width="100">조회수</th>
         </tr>
+
 <!--        model에 있는 데이터를 타임리프는 html에 뿌려주게 되고, 순수한 html파일로 만들어서 톰캣에 전달-->
 <!--        each : for문-->
 <!--        model에 있는 boardList 배열을 순회해서 board라는 객체를 하나씩 출력 (유사 : 향상된 포문)-->
         <tr th:each="board : ${boardList}">
             <td th:text="${board.seq}"></td>
+            <td th:text="${board.category}"></td>
             <!--
             a태그를 사용하여 링크를 만들고,
             @{getBoard로 controller에 mapping 주소를 직시
@@ -29,6 +66,7 @@
             -->
 <!--            <td th:text="${state.count}"></td>-->
             <td><a th:href="@{/getBoard(
+                                    category=${board.category},
                                     seq=${board.seq},
                                     userId='userIdTeste',
                                     userRole='userIdRole',
@@ -39,11 +77,13 @@
                                     createDate=${board.createDate},
                                     cnt=${board.cnt}
                                     )}"
-                  th:text="${board.title}"></a></td>
+                  th:text="${board.title}"></a>
+            </td>
+            <td th:text="${#strings.abbreviate(board.content,20)}"></td>
             <td th:text="${board.writer}"></td>
             <!-- dates.format = 날짜를 일정 형식으로 바꿔주는 포맷팅-->
             <td th:text="${#dates.format(board.createDate, 'yyyy년 MM월 dd일 HH시mm분 ss초')}"></td>
-<!--            <td th:text="${board.createDate}"></td>-->
+            <!-- <td th:text="${board.createDate}"></td>-->
             <td th:text="${board.cnt}"></td>
 
         </tr>

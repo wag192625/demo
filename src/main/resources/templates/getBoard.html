@@ -11,6 +11,11 @@
     <form th:action="@{updateBoard}" method="post">
         <input name="seq" type="hidden" th:value="${seq}">
     <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+        <select name="category" id="">
+            <option th:text="${category}"selected></option>
+            <option value="전체글">전체글</option>
+            <option value="인기글">인기글</option>
+        </select>
         <tr>
             <td bgcolor="orange" th:text="번호" width="80"></td>
             <td th:text="${seq}"></td>
@@ -43,17 +48,21 @@
                 <input type="submit" value="게시글 수정">
             </td>
         </tr>
-<!--        <tr>-->
-<!--            <td colspan="2">-->
-<!--                <div style="text-align: center;">-->
-<!--                    <input type="submit" value="수정"/>-->
-<!--                </div>-->
-<!--            </td>-->
-<!--        </tr>-->
     </table>
     </form>
     <a th:href="@{/insertBoard}">글등록</a>
     <a th:href="@{/deleteBoard(seq=${seq})}">글삭제</a>
     <a th:href="@{/getBoardList}">글목록</a>
+<!--    <table>-->
+<!--        <tr th:bgcolor="yellow">-->
+<!--            <td>댓글</td>-->
+<!--            <td><textarea name="comment" th:text="${comment}" cols="30" rows="10"></textarea></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+    <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+        <tr>
+            <td><textarea name="reply" th:text="${reply}" cols="80" rows="10"></textarea></td>
+        </tr>
+    </table>
 </body>
 </html>

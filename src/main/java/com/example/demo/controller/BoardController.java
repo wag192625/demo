@@ -45,6 +45,7 @@ public class BoardController {
     //아래의 @PostMapping에 연결
     @PostMapping("insertBoard")
     public String insertBoard(
+            @RequestParam("category")String category,
             @RequestParam("title")String title,
             @RequestParam("writer")String writer,
             @RequestParam("content")String content,
@@ -60,6 +61,7 @@ public class BoardController {
         count++;
         Board board = new Board();
 
+        board.setCategory(category);
         board.setSeq((long) count);
         board.setTitle(title);
         board.setWriter(writer);
@@ -80,6 +82,7 @@ public class BoardController {
     //Key값을 매개변수를 전달
     @RequestMapping("getBoard")
     public String getBoard(
+            @RequestParam("category")String category,
             @RequestParam("seq")String seq,
             @RequestParam("userRole")String userRole,
             @RequestParam("userId")String userId,
@@ -89,6 +92,8 @@ public class BoardController {
             @RequestParam("createDate")String createDate,
             @RequestParam("cnt")String cnt,
             Model model) {
+
+        model.addAttribute("category", category);
         model.addAttribute("seq", seq);
         model.addAttribute("title", title);
         model.addAttribute("writer", writer);
@@ -127,12 +132,13 @@ public class BoardController {
 //            }
 //        }
 //        title_array 일때는 삭제가 안되었는데 그 이유가 뭐냐
-//        getBoard.html에서
+//        getBoard.html에서 삭제는 했는데 다시 title로 돌아와서
 
 
         if(board_array.size()> 0) {
             for(int i=0; i<board_array.size(); i++){
                 Board board =new Board();
+                board.setCategory(board_array.get(i).getCategory());
                 board.setSeq(board_array.get(i).getSeq());
                 board.setTitle(board_array.get(i).getTitle());
                 board.setWriter(board_array.get(i).getWriter());
@@ -177,7 +183,8 @@ public class BoardController {
     @PostMapping("/updateBoard")
     public String updateBoard(
             //HTML에서 name 속성을 가진 값을 매개변수 String seq에 할당
-            //=@RequestParam("seq")
+
+            @RequestParam("category")String category,
             @RequestParam("seq")String seq,
             @RequestParam("title")String title,
             @RequestParam("content")String content
@@ -186,12 +193,16 @@ public class BoardController {
         for (int i = 0; i < board_array.size(); i++) {
             if (Long.toString(board_array.get(i).getSeq()).equals(seq)) {
                 //setTitle과 같은 setter로 데이터 변경
+                board_array.get(i).setCategory(category);
                 board_array.get(i).setTitle(title);
                 board_array.get(i).setContent(content);
                 }
             }
         return "redirect:getBoardList";
     }
+//    @PostMapping()
+//    public String
+
 
 //    @GetMapping("/getBoard")
 //    public String getBoard(Board board, Model model) {
